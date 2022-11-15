@@ -1,23 +1,17 @@
-# We first specify the terraform provider. 
-# Terraform will use the provider to ensure that we can work with Microsoft Azure
-
 terraform {
   required_providers {
     azurerm = {
       source = "hashicorp/azurerm"
-      version = "2.92.0"
+      version = "3.31.0"
     }
   }
 }
 
-# Here we need to mention the Azure AD Application Object credentials to allow us to work with 
-# our Azure account
-
 provider "azurerm" {
-  subscription_id = "6912d7a0-bc28-459a-9407-33bbba641c07"
-  client_id       = "230411ec-45e9-4650-95b2-7675131e2d1a"
-  client_secret   = "8D~7Q~y39tBTXsFXGcuVIwvGCOorRUo6dXtwX"
-  tenant_id       = "70c0f6d9-7f3b-4425-a6b6-09b47643ec58"
+  subscription_id = "17a163e1-cd14-4a6a-80c4-05945f55fa55"
+  client_id       = "bef8bc2e-ee98-4fee-95d1-736c7a549f7b"
+  client_secret   = "lMI8Q~oFvaJXlGbG4AGrlT61XjQKdqFMqo1HKbeC"
+  tenant_id       = "e50252cb-70fc-4a19-9c59-0cf02c9bf284"
   features {}
 }
 
@@ -26,5 +20,5 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "app_grp"{
   name="app-grp" 
-  location="North Europe"
+  location="southafricanorth"
 }
