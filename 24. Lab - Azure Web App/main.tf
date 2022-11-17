@@ -2,16 +2,16 @@ terraform {
   required_providers {
     azurerm = {
       source = "hashicorp/azurerm"
-      version = "2.92.0"
+      version = "3.31.0"
     }
   }
 }
 
 provider "azurerm" {
-  subscription_id = "6912d7a0-bc28-459a-9407-33bbba641c07"
-  client_id       = "7048caf3-327c-4b70-9461-e47683ec9b6f"
-  client_secret   = "BkK7Q~mxpNI4TIH-eb7B9oGvx6ntABH~L-iQn"
-  tenant_id       = "70c0f6d9-7f3b-4425-a6b6-09b47643ec58"
+  subscription_id = "17a163e1-cd14-4a6a-80c4-05945f55fa55"
+  client_id       = "bef8bc2e-ee98-4fee-95d1-736c7a549f7b"
+  client_secret   = "lMI8Q~oFvaJXlGbG4AGrlT61XjQKdqFMqo1HKbeC"
+  tenant_id       = "e50252cb-70fc-4a19-9c59-0cf02c9bf284"
   features {}
 }
 
@@ -26,21 +26,19 @@ resource "azurerm_resource_group" "app_grp"{
   name=local.resource_group
   location=local.location
 }
-
-resource "azurerm_app_service_plan" "app_plan1000" {
+resource "azurerm_service_plan" "app_plan1000" {
   name                = "app-plan1000"
   location            = azurerm_resource_group.app_grp.location
   resource_group_name = azurerm_resource_group.app_grp.name
-
-  sku {
-    tier = "Basic"
-    size = "B1"
-  }
+  os_type             = "Windows"
+  sku_name            = "B1"
 }
 
-resource "azurerm_app_service" "webapp" {
+resource "azurerm_windows_web_app" "webapp" {
   name                = "webapp2530050"
-  location            = azurerm_resource_group.app_grp.location
   resource_group_name = azurerm_resource_group.app_grp.name
-  app_service_plan_id = azurerm_app_service_plan.app_plan1000.id
+  location            = azurerm_resource_group.app_grp.location
+  service_plan_id     = azurerm_service_plan.app_plan1000.id
+
+  site_config {}
 }
